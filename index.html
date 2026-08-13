@@ -11,442 +11,325 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <style>
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    font-family:'Poppins',sans-serif;
-    position:relative;
-
-    background:
-    radial-gradient(circle at top,#ff758c33 0%,transparent 35%),
-    radial-gradient(circle at bottom,#ff7eb333 0%,transparent 35%),
-    linear-gradient(135deg,#050505,#111111,#050505);
-
-    color:white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    background: 
+    radial-gradient(circle at top, #ff758c33 0%, transparent 35%),
+    radial-gradient(circle at bottom, #ff7eb333 0%, transparent 35%),
+    linear-gradient(135deg, #050505, #111111, #050505);
+    color: white;
 }
 
 /* Floating Hearts */
-
 .hearts{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .heart{
-    position:absolute;
-    bottom:-50px;
-    animation:floatUp linear forwards;
-    opacity:0;
+    position: absolute;
+    bottom: -50px;
+    animation: floatUp linear forwards;
+    opacity: 0;
 }
 
 @keyframes floatUp{
-
     0%{
-        transform:translateY(0) scale(.5);
-        opacity:0;
+        transform: translateY(0) scale(.5);
+        opacity: 0;
     }
-
     20%{
-        opacity:1;
+        opacity: 1;
     }
-
     100%{
-        transform:translateY(-110vh) scale(1.5);
-        opacity:0;
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
     }
 }
 
 /* Main Card */
-
 .card{
-
-    width:90%;
-    max-width:700px;
-
-    padding:40px;
-
-    border-radius:30px;
-
-    background:rgba(255,255,255,.08);
-
-    backdrop-filter:blur(20px);
-
-    border:1px solid rgba(255,255,255,.15);
-
-    box-shadow:
-    0 20px 60px rgba(0,0,0,.5),
-    0 0 40px rgba(255,118,136,.2);
-
-    text-align:center;
-
-    position:relative;
-    z-index:10;
-
-    animation:fadeIn 1.5s ease;
+    width: 90%;
+    max-width: 700px;
+    padding: 40px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, .08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, .15);
+    box-shadow: 
+    0 20px 60px rgba(0, 0, 0, .5),
+    0 0 40px rgba(255, 118, 136, .2);
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    animation: fadeIn 1.5s ease;
 }
 
 @keyframes fadeIn{
-
     from{
-        opacity:0;
-        transform:translateY(30px);
+        opacity: 0;
+        transform: translateY(30px);
     }
-
     to{
-        opacity:1;
-        transform:translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
 /* Profile Image */
-
 .image-box{
-
-    width:250px;
-    height:250px;
-
-    margin:auto;
-
-    border-radius:50%;
-    overflow:hidden;
-
-    border:5px solid #ff758c;
-
-    box-shadow:
-    0 0 25px rgba(255,117,140,.6),
-    0 0 50px rgba(255,117,140,.3);
-
-    animation:pulse 2s infinite alternate;
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #ff758c;
+    box-shadow: 
+    0 0 25px rgba(255, 117, 140, .6),
+    0 0 50px rgba(255, 117, 140, .3);
+    animation: pulse 2s infinite alternate;
 }
 
 .image-box img{
-
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 @keyframes pulse{
-
     from{
-        box-shadow:
-        0 0 20px rgba(255,117,140,.5);
+        box-shadow: 0 0 20px rgba(255, 117, 140, .5);
     }
-
     to{
-        box-shadow:
-        0 0 50px rgba(255,117,140,.9);
+        box-shadow: 0 0 50px rgba(255, 117, 140, .9);
     }
 }
 
 /* Text */
-
 h1{
-
-    margin-top:25px;
-
-    font-family:'Sacramento',cursive;
-
-    font-size:70px;
-
-    color:#ff8fa3;
+    margin-top: 25px;
+    font-family: 'Sacramento', cursive;
+    font-size: 70px;
+    color: #ff8fa3;
 }
 
 .message{
-
-    margin-top:15px;
-
-    line-height:1.9;
-
-    color:#f5f5f5;
-
-    font-size:15px;
-
-    max-width:550px;
-
-    margin-left:auto;
-    margin-right:auto;
+    margin-top: 15px;
+    line-height: 1.9;
+    color: #f5f5f5;
+    font-size: 15px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Buttons */
-
 .buttons{
-
-    margin-top:30px;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:20px;
-
-    flex-wrap:wrap;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 60px;
 }
 
 .btn{
-
-    border:none;
-
-    cursor:pointer;
-
-    padding:14px 32px;
-
-    border-radius:999px;
-
-    font-size:15px;
-
-    font-weight:600;
-
-    transition:.3s ease;
+    border: none;
+    cursor: pointer;
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: .3s ease;
 }
 
 .yes-btn{
-
-    background:linear-gradient(
-    45deg,
-    #ff4d6d,
-    #ff758f
-    );
-
-    color:white;
-
-    box-shadow:
-    0 10px 30px rgba(255,77,109,.4);
+    background: linear-gradient(45deg, #ff4d6d, #ff758f);
+    color: white;
+    box-shadow: 0 10px 30px rgba(255, 77, 109, .4);
+    z-index: 10;
 }
 
 .yes-btn:hover{
-
-    transform:
-    translateY(-3px)
-    scale(1.05);
+    transform: translateY(-3px) scale(1.05);
 }
 
 .no-btn{
-
-    background:rgba(255,255,255,.1);
-
-    color:white;
-
-    border:1px solid rgba(255,255,255,.2);
-
-    backdrop-filter:blur(10px);
+    background: rgba(255, 255, 255, .1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    transition: top 0.1s ease, left 0.1s ease;
+    z-index: 100;
 }
 
 /* Success Box */
-
 .success{
-
-    display:none;
-
-    margin-top:25px;
-
-    animation:fadeIn .8s ease;
+    display: none;
+    margin-top: 25px;
+    animation: fadeIn .8s ease;
 }
 
 .success h2{
-
-    color:#ff9eb2;
-
-    margin-bottom:10px;
+    color: #ff9eb2;
+    margin-bottom: 10px;
+    font-size: 35px;
 }
 
 /* Mobile */
-
-@media(max-width:768px){
-
+@media(max-width: 768px){
     .card{
-        padding:25px;
+        padding: 25px;
     }
-
     .image-box{
-
-        width:190px;
-        height:190px;
+        width: 190px;
+        height: 190px;
     }
-
     h1{
-        font-size:50px;
+        font-size: 50px;
     }
-
     .message{
-        font-size:14px;
+        font-size: 14px;
     }
 }
-
 </style>
 </head>
 
 <body>
+
+<!-- ব্যাকগ্রাউন্ডে মিষ্টি রোমান্টিক মিউজিক টোন -->
+<audio id="bgMusic" loop>
+    <source src="https://actions.google.com/sounds/v1/ambiences/romantic_lofi.ogg" type="audio/ogg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=romantic-cute-love-111082.mp3" type="audio/mpeg">
+</audio>
 
 <div class="hearts" id="hearts"></div>
 
 <div class="card">
 
     <div class="image-box">
-
-        <img
-        src="https://raw.githubusercontent.com/outof777/gift/main/ChatGPT%20Image%20Aug%2013%2C%202026%2C%2010_46_43%20PM.png"
-        alt="Special Person"
-        onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1000'">
-
+        <img src="https://raw.githubusercontent.com/outof777/gift/main/ChatGPT%20Image%20Aug%2013%2C%202026%2C%2010_46_43%20PM.png" alt="Special Person" crossorigin="anonymous" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1000'">
     </div>
 
     <h1>I'm Sorry ❤️</h1>
 
     <p class="message">
-
         জানি আমার উপর অনেক রাগ করে আছো...
-        কিন্তু বিশ্বাস করো, তোমার হাসিটাই আমার পৃথিবীর
-        সবচেয়ে সুন্দর জিনিস। 🥺❤️
+        কিন্তু বিশ্বাস করো, তোমার হাসিটাই আমার পৃথিবীর সবচেয়ে সুন্দর জিনিস। 🥺❤️
 
         <br><br>
 
-        তোমার মুখে একটু অভিমান দেখলেও আমার মনটা
-        খারাপ হয়ে যায়। তাই আজ সব রাগ, অভিমান
-        আর কষ্ট ভুলে গিয়ে আবার আগের মতো
-        একটা সুন্দর হাসি দাও না?
+        তোমার মুখে একটু অভিমান দেখলেও আমার মনটা খারাপ হয়ে যায়। তাই আজ সব রাগ, অভিমান আর কষ্ট ভুলে গিয়ে আবার আগের মতো একটা সুন্দর হাসি দাও না?
 
         ✨❤️
-
     </p>
 
     <div class="buttons" id="buttonBox">
-
-        <button
-        class="btn yes-btn"
-        onclick="forgiveMe()">
-
+        <button class="btn yes-btn" onclick="forgiveMe()">
             মাফ করে দিলাম ❤️
-
         </button>
 
-        <button
-        class="btn no-btn"
-        id="noBtn"
-        onmouseover="moveButton()"
-        ontouchstart="moveButton()">
-
+        <button class="btn no-btn" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()" onclick="threatWarning()">
             এখনও রাগ আছি 😾
-
         </button>
-
     </div>
 
     <div class="success" id="successBox">
-
         <h2>Yayyy! 🥰❤️</h2>
-
         <p>
-
-            আমি জানতাম তুমি বেশিক্ষণ রাগ করে
-            থাকতে পারবে না। ❤️
+            আমি জানতাম তুমি বেশিক্ষণ রাগ করে থাকতে পারবে না। ❤️
 
             <br><br>
 
-            Promise...
-            তোমার হাসিটা সবসময়
-            আগলে রাখার চেষ্টা করবো। ✨
-
+            Promise... তোমার হাসিটা সবসময় আগলে রাখার চেষ্টা করবো। ✨
         </p>
-
     </div>
 
 </div>
 
 <script>
+/* পেজে প্রথম ক্লিক করলেই ব্যাকগ্রাউন্ড মিউজিক প্লে হবে */
+window.addEventListener('click', () => {
+    const music = document.getElementById('bgMusic');
+    if (music.paused) {
+        music.play().catch(e => console.log("Audio play blocked"));
+    }
+}, { once: true });
 
 /* Floating Hearts */
-
-const heartsContainer =
-document.getElementById("hearts");
+const heartsContainer = document.getElementById("hearts");
 
 function createHeart(){
-
-    const heart =
-    document.createElement("div");
-
+    const heart = document.createElement("div");
     heart.className = "heart";
-
     heart.innerHTML = "❤️";
-
-    heart.style.left =
-    Math.random()*100 + "vw";
-
-    heart.style.fontSize =
-    (15 + Math.random()*25) + "px";
-
-    heart.style.animationDuration =
-    (4 + Math.random()*4) + "s";
+    
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
 
     heartsContainer.appendChild(heart);
 
     setTimeout(()=>{
         heart.remove();
-    },8000);
+    }, 8000);
 }
 
-setInterval(createHeart,300);
+setInterval(createHeart, 300);
 
-/* Run Away Button */
-
-const noBtn =
-document.getElementById("noBtn");
+/* Run Away Button (No Button) */
+const noBtn = document.getElementById("noBtn");
 
 function moveButton(){
-
-    const x =
-    Math.random() *
-    (window.innerWidth -
-    noBtn.offsetWidth - 50);
-
-    const y =
-    Math.random() *
-    (window.innerHeight -
-    noBtn.offsetHeight - 50);
+    const padding = 50;
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+    
+    const randomX = Math.max(padding, Math.random() * maxX);
+    const randomY = Math.max(padding, Math.random() * maxY);
 
     noBtn.style.position = "fixed";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+}
+
+/* Threat Warning on Click */
+function threatWarning() {
+    alert("খবরদার! 😾 রাগ করা এক্কেবারে নিষেধ! বেশি বাড়াবাড়ি করলে কিন্তু সোজা মায়ার মাইর দিয়ে একদম ভূত নামিয়ে দেব! তাড়াতাড়ি 'মাফ করে দিলাম' বাটনটায় ক্লিক করো! 😉");
 }
 
 /* Forgive Function */
-
 function forgiveMe(){
-
     confetti({
-
-        particleCount:250,
-        spread:120,
-        startVelocity:40,
-
+        particleCount: 250,
+        spread: 120,
+        startVelocity: 40,
         origin:{
-            y:0.6
+            y: 0.6
         }
-
     });
 
-    document.getElementById(
-    "buttonBox"
-    ).style.display="none";
-
-    document.getElementById(
-    "successBox"
-    ).style.display="block";
+    document.getElementById("buttonBox").style.display = "none";
+    document.getElementById("successBox").style.display = "block";
 }
-
 </script>
 
 </body>
