@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person ❤️</title>
+    <!-- কনফেটি লাইব্রেরি -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050505;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            position: relative;
+        }
+
+        /* সিনেমাটিক ডার্ক ওভারলে */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
+            z-index: 1;
+        }
+
+        .main-box {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        /* ইমেজ ফ্রেম - সিনেমাটিক এন্ট্রি */
+        .image-frame {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid #ff4757;
+            box-shadow: 0 0 30px rgba(255, 71, 87, 0.4);
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            animation: cinematicZoomIn 3s ease-out forwards;
+            animation-delay: 0.3s;
+            background-color: #fff;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.95);
+            animation: slowKenBurns 10s infinite alternate;
+        }
+
+        /* টেক্সট কন্টেন্ট */
+        .text-content {
+            margin-top: 25px;
+            opacity: 0;
+            animation: fadeInText 2s ease-in forwards;
+            animation-delay: 2.8s;
+        }
+
+        h1 {
+            font-family: 'Sacramento', cursive;
+            font-size: 45px;
+            color: #ff4757;
+            margin-bottom: 8px;
+            text-shadow: 0 0 15px rgba(255, 71, 87, 0.6);
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 500px;
+            margin: 0 auto 25px auto;
+            font-weight: 300;
+            color: #f1f1f1;
+        }
+
+        /* বাটন গ্রুপ */
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            position: relative;
+            opacity: 0;
+            animation: fadeInText 1s ease-in forwards;
+            animation-delay: 4s;
+            width: 100%;
+            min-height: 50px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-yes {
+            background: linear-gradient(45deg, #ff4757, #ff6b81);
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 71, 87, 0.6);
+        }
+
+        /* পালানো বাটন (No Button) */
+        .btn-no {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            transition: 0.15s ease-out;
+        }
+
+        /* ====== এনিমেশন কী-ফ্রেম ====== */
+        @keyframes cinematicZoomIn {
+            0% {
+                transform: scale(0.1) rotate(-180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                width: 260px;
+                height: 260px;
+                opacity: 1;
+                box-shadow: 0 0 50px rgba(255, 71, 87, 0.6);
+            }
+        }
+
+        @keyframes slowKenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.12); }
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            @keyframes cinematicZoomIn {
+                100% { transform: scale(1); width: 200px; height: 200px; }
+            }
+            h1 { font-size: 38px; }
+            p { font-size: 13px; padding: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="overlay"></div>
+
+    <!-- ব্যাকগ্রাউন্ডে মিষ্টি রোমান্টিক মিউজিক টোন -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sensations-412.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="main-box">
+        <!-- ইমেজ ফ্রেম (সঠিক গিটহ্যাব লিংক যুক্ত করা হয়েছে) -->
+        <div class="image-frame">
+            <img src="https://raw.githubusercontent.com/nahid-mahmud555/nahid-mahmud555/main/ChatGPT%20Image%20Aug%2013%2C%202026%2C%2010_46_43%20PM.png" alt="Special Person">
+        </div>
+
+        <!-- সুদৃশ্য কথা ও আকুতি -->
+        <div class="text-content">
+            <h1>I am really sorry!</h1>
+            <p>জানি আমার ওপর অনেক অভিমান করে আছো, রাগ করে কথা কম বলছ... বিশ্বাস করো, তোমার এই সুন্দর মুখটাতে একটু কান্নার বা রাগের ছায়া দেখলে আমার নিজের ভেতরটা কেমন যেন ভেঙে যায়। দুনিয়ার সব সুখ একপাশে আর তোমার এই মিষ্টি হাসিটা একপাশে! প্লিজ সব রাগ পানি করে ফেলো না সোনা?</p>
+            
+            <!-- বাটন সেকশন -->
+            <div class="btn-group" id="btnContainer">
+                <button class="btn btn-yes" onclick="acceptApology()">মাফ করে দিলাম ❤️</button>
+                <button class="btn btn-no" id="noBtn" onmouseover="moveButton()" onclick="threatWarning()">এখনও রাগ আছি 😾</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // পেজে ক্লিক করলেই বা এনিমেশন চলাকালীন ব্যাকগ্রাউন্ড মিউজিক প্লে করার হ্যান্ডলার
+        window.addEventListener('click', () => {
+            const music = document.getElementById('bgMusic');
+            if (music.paused) {
+                music.play().catch(e => console.log("Audio play blocked"));
+            }
+        }, { once: true });
+
+        // "No" বাটনটি মাউস বা আঙুল লাগলেই স্ক্রিনের অন্য জায়গায় পালিয়ে যাবে
+        const noBtn = document.getElementById('noBtn');
+
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 100);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${Math.max(20, x)}px`;
+            noBtn.style.top = `${Math.max(20, y)}px`;
+        }
+
+        // মায়ার মাইরের হুমকি পপআপ
+        function threatWarning() {
+            alert("খবরদার! 😾 রাগ করা এক্কেবারে নিষেধ! বেশি বাড়াবাড়ি করলে কিন্তু সোজা মায়ার মাইর দিয়ে একদম ভূত নামিয়ে দেব! তাড়াতাড়ি 'মাফ করে দিলাম' বাটনটায় ক্লিক করো! 😉");
+        }
+
+        // ক্ষমা করে দিলে যা হবে
+        function acceptApology() {
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+
+            document.querySelector('.text-content h1').innerText = "Yay! Thank You! 🥰";
+            document.querySelector('.text-content p').innerText = "আমি জানতাম তুমি আমার ওপর বেশিক্ষণ রাগ করে থাকতে পারবে না! Promise আর কখনো তোমাকে কষ্ট দেব না। You are my whole world! ✨❤️";
+            document.getElementById('btnContainer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
