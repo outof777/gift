@@ -51,26 +51,30 @@
             padding: 20px;
         }
 
-        /* ইমেজ ফ্রেম - সিনেমাটিক এন্ট্রি */
+        /* ইমেজ ফ্রেম - ফিক্সড সাইজ এবং পারফেক্ট ফিট */
         .image-frame {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             border: 4px solid #ff4757;
-            box-shadow: 0 0 30px rgba(255, 71, 87, 0.4);
+            box-shadow: 0 0 30px rgba(255, 71, 87, 0.5);
             overflow: hidden;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             opacity: 0;
             animation: cinematicZoomIn 3s ease-out forwards;
             animation-delay: 0.3s;
-            background-color: #fff;
+            background-color: #1a1a1a;
         }
 
         .image-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            filter: brightness(0.95);
+            object-fit: cover; /* ছবি বক্সের ভেতরে সুন্দরভাবে বসে যাবে */
+            object-position: center; /* সেন্টারে ফোকাস থাকবে */
+            display: block;
             animation: slowKenBurns 10s infinite alternate;
         }
 
@@ -188,7 +192,7 @@
     </audio>
 
     <div class="main-box">
-        <!-- ইমেজ ফ্রেম (সঠিক গিটহ্যাব লিংক যুক্ত করা হয়েছে) -->
+        <!-- ইমেজ ফ্রেম (পারফেক্ট ফিট ফিক্সড) -->
         <div class="image-frame">
             <img src="https://raw.githubusercontent.com/nahid-mahmud555/nahid-mahmud555/main/ChatGPT%20Image%20Aug%2013%2C%202026%2C%2010_46_43%20PM.png" alt="Special Person">
         </div>
@@ -207,7 +211,7 @@
     </div>
 
     <script>
-        // পেজে ক্লিক করলেই বা এনিমেশন চলাকালীন ব্যাকগ্রাউন্ড মিউজিক প্লে করার হ্যান্ডলার
+        // পেজে ক্লিক করলেই ব্যাকগ্রাউন্ড মিউজিক প্লে করার হ্যান্ডলার
         window.addEventListener('click', () => {
             const music = document.getElementById('bgMusic');
             if (music.paused) {
