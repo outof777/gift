@@ -22,7 +22,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow-y: auto; /* যাতে যেকোনো ডিভাইসে স্ক্রল করা যায় */
+    overflow-x: hidden;
     font-family: 'Poppins', sans-serif;
     position: relative;
     background: 
@@ -30,6 +31,7 @@ body{
     radial-gradient(circle at bottom, #ff7eb333 0%, transparent 35%),
     linear-gradient(135deg, #050505, #111111, #050505);
     color: white;
+    padding: 20px;
 }
 
 /* Floating Hearts */
@@ -64,9 +66,9 @@ body{
 
 /* Main Card */
 .card{
-    width: 90%;
-    max-width: 700px;
-    padding: 40px;
+    width: 100%;
+    max-width: 550px;
+    padding: 35px 25px;
     border-radius: 30px;
     background: rgba(255, 255, 255, .08);
     backdrop-filter: blur(20px);
@@ -78,6 +80,7 @@ body{
     position: relative;
     z-index: 10;
     animation: fadeIn 1.5s ease;
+    margin: auto;
 }
 
 @keyframes fadeIn{
@@ -93,12 +96,12 @@ body{
 
 /* Profile Image */
 .image-box{
-    width: 250px;
-    height: 250px;
+    width: 180px;
+    height: 180px;
     margin: auto;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid #ff758c;
+    border: 4px solid #ff758c;
     box-shadow: 
     0 0 25px rgba(255, 117, 140, .6),
     0 0 50px rgba(255, 117, 140, .3);
@@ -123,39 +126,39 @@ body{
 
 /* Text */
 h1{
-    margin-top: 25px;
+    margin-top: 20px;
     font-family: 'Sacramento', cursive;
-    font-size: 70px;
+    font-size: 55px;
     color: #ff8fa3;
 }
 
 .message{
-    margin-top: 15px;
-    line-height: 1.9;
+    margin-top: 12px;
+    line-height: 1.8;
     color: #f5f5f5;
-    font-size: 15px;
-    max-width: 550px;
+    font-size: 14px;
+    max-width: 480px;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* Buttons */
 .buttons{
-    margin-top: 30px;
+    margin-top: 25px;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     flex-wrap: wrap;
     position: relative;
-    min-height: 60px;
+    min-height: 50px;
 }
 
 .btn{
     border: none;
     cursor: pointer;
-    padding: 14px 32px;
+    padding: 12px 28px;
     border-radius: 999px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     transition: .3s ease;
 }
@@ -184,30 +187,35 @@ h1{
 /* Success Box */
 .success{
     display: none;
-    margin-top: 25px;
+    margin-top: 20px;
     animation: fadeIn .8s ease;
 }
 
 .success h2{
     color: #ff9eb2;
-    margin-bottom: 10px;
-    font-size: 35px;
+    margin-bottom: 8px;
+    font-size: 30px;
 }
 
-/* Mobile */
-@media(max-width: 768px){
+.success p{
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Mobile Adjustments */
+@media(max-width: 480px){
     .card{
-        padding: 25px;
+        padding: 20px 15px;
     }
     .image-box{
-        width: 190px;
-        height: 190px;
+        width: 140px;
+        height: 140px;
     }
     h1{
-        font-size: 50px;
+        font-size: 45px;
     }
     .message{
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 </style>
@@ -229,7 +237,7 @@ h1{
         <img src="https://raw.githubusercontent.com/outof777/gift/main/ChatGPT%20Image%20Aug%2013%2C%202026%2C%2010_46_43%20PM.png" alt="Special Person" crossorigin="anonymous" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1000'">
     </div>
 
-    <h1>I'm Sorry ❤️</h1>
+    <h1>I's Sorry ❤️</h1>
 
     <p class="message">
         জানি আমার উপর অনেক রাগ করে আছো...
@@ -299,7 +307,7 @@ setInterval(createHeart, 300);
 const noBtn = document.getElementById("noBtn");
 
 function moveButton(){
-    const padding = 50;
+    const padding = 20;
     const maxX = window.innerWidth - noBtn.offsetWidth - padding;
     const maxY = window.innerHeight - noBtn.offsetHeight - padding;
     
@@ -313,7 +321,7 @@ function moveButton(){
 
 /* Threat Warning on Click */
 function threatWarning() {
-    alert("খবরদার! 😾 রাগ করা এক্কেবারে নিষেধ! বেশি বাড়াবাড়ি করলে কিন্তু সোজা মায়ার মাইর দিয়ে একদম ভূত নামিয়ে দেব! তাড়াতাড়ি 'মাফ করে দিলাম' বাটনটায় ক্লিক করো! 😉");
+    alert("খবরদার! 😾 রাগ করা এক্কেবারে নিষেধ! বেশি বাড়াবাড়ি করলে কিন্তু সোজা মায়ার মাইর দিয়ে একদম ভূত নামিয়ে দেব! তাড়াতাড়ি 'মাফ করে দিলাম' বাটনটায় ক্লিক করো! 😉");
 }
 
 /* Forgive Function */
