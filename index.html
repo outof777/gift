@@ -38,6 +38,40 @@
             z-index: 1;
         }
 
+        /* ব্যাকগ্রাউন্ড ফ্লোটিং কিউট লাভ অ্যানিমেশন */
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 71, 87, 0.6);
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+            bottom: -20px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.6) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-105vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         .main-box {
             position: relative;
             z-index: 2;
@@ -57,7 +91,7 @@
             height: 220px;
             border-radius: 50%;
             border: 4px solid #ff4757;
-            box-shadow: 0 0 30px rgba(255, 71, 87, 0.5);
+            box-shadow: 0 0 35px rgba(255, 71, 87, 0.6);
             overflow: hidden;
             position: relative;
             display: flex;
@@ -72,8 +106,8 @@
         .image-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* ছবি বক্সের ভেতরে সুন্দরভাবে বসে যাবে */
-            object-position: center; /* সেন্টারে ফোকাস থাকবে */
+            object-fit: cover;
+            object-position: center;
             display: block;
             animation: slowKenBurns 10s infinite alternate;
         }
@@ -88,10 +122,16 @@
 
         h1 {
             font-family: 'Sacramento', cursive;
-            font-size: 45px;
+            font-size: 48px;
             color: #ff4757;
             margin-bottom: 8px;
-            text-shadow: 0 0 15px rgba(255, 71, 87, 0.6);
+            text-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 71, 87, 0.5); }
+            100% { text-shadow: 0 0 25px rgba(255, 71, 87, 0.9); }
         }
 
         p {
@@ -113,11 +153,11 @@
             animation: fadeInText 1s ease-in forwards;
             animation-delay: 4s;
             width: 100%;
-            min-height: 50px;
+            min-height: 60px;
         }
 
         .btn {
-            padding: 12px 28px;
+            padding: 12px 30px;
             border: none;
             border-radius: 50px;
             font-size: 15px;
@@ -131,21 +171,23 @@
             background: linear-gradient(45deg, #ff4757, #ff6b81);
             color: white;
             box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
+            z-index: 10;
         }
 
         .btn-yes:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 71, 87, 0.6);
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 15px 30px rgba(255, 71, 87, 0.7);
         }
 
-        /* পালানো বাটন (No Button) */
+        /* সুপার ফাস্ট পালানো বাটন (No Button) */
         .btn-no {
             background: rgba(255, 255, 255, 0.15);
             color: white;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             position: relative;
-            transition: 0.15s ease-out;
+            transition: top 0.1s ease, left 0.1s ease;
+            z-index: 100;
         }
 
         /* ====== এনিমেশন কী-ফ্রেম ====== */
@@ -156,10 +198,10 @@
             }
             100% {
                 transform: scale(1) rotate(0deg);
-                width: 260px;
-                height: 260px;
+                width: 240px;
+                height: 240px;
                 opacity: 1;
-                box-shadow: 0 0 50px rgba(255, 71, 87, 0.6);
+                box-shadow: 0 0 50px rgba(255, 71, 87, 0.7);
             }
         }
 
@@ -175,7 +217,7 @@
 
         @media (max-width: 600px) {
             @keyframes cinematicZoomIn {
-                100% { transform: scale(1); width: 200px; height: 200px; }
+                100% { transform: scale(1); width: 190px; height: 190px; }
             }
             h1 { font-size: 38px; }
             p { font-size: 13px; padding: 0 10px; }
@@ -186,15 +228,19 @@
     
     <div class="overlay"></div>
 
-    <!-- ব্যাকগ্রাউন্ডে মিষ্টি রোমান্টিক মিউজিক টোন -->
+    <!-- ব্যাকগ্রাউন্ডে কিউট ফ্লোটিং লাভ অ্যানিমেশন কন্টেইনার -->
+    <div class="floating-hearts" id="heartContainer"></div>
+
+    <!-- ব্যাকগ্রাউন্ডে মিষ্টি রোমান্টিক মিউজিক টোন (ফ্রি রিলায়েবল সিডিএন সোর্স) -->
     <audio id="bgMusic" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sensations-412.mp3" type="audio/mpeg">
+        <source src="https://actions.google.com/sounds/v1/ambiences/romantic_lofi.ogg" type="audio/ogg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=romantic-cute-love-111082.mp3" type="audio/mpeg">
     </audio>
 
     <div class="main-box">
-        <!-- ইমেজ ফ্রেম (পারফেক্ট ফিট ফিক্সড) -->
+        <!-- ইমেজ ফ্রেম (ORB ব্লকিং এড়াতে সঠিক হ্যান্ডলিং) -->
         <div class="image-frame">
-            <img src="https://raw.githubusercontent.com/nahid-mahmud555/nahid-mahmud555/main/ChatGPT%20Image%20Aug%2013%2C%202026%2C%2010_46_43%20PM.png" alt="Special Person">
+            <img src="https://raw.githubusercontent.com/nahid-mahmud555/nahid-mahmud555/main/ChatGPT%20Image%20Aug%2013%2C%202026%2C%2010_46_43%20PM.png" alt="Special Person" crossorigin="anonymous" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=500&auto=format&fit=crop'">
         </div>
 
         <!-- সুদৃশ্য কথা ও আকুতি -->
@@ -205,12 +251,33 @@
             <!-- বাটন সেকশন -->
             <div class="btn-group" id="btnContainer">
                 <button class="btn btn-yes" onclick="acceptApology()">মাফ করে দিলাম ❤️</button>
-                <button class="btn btn-no" id="noBtn" onmouseover="moveButton()" onclick="threatWarning()">এখনও রাগ আছি 😾</button>
+                <button class="btn btn-no" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()" onclick="threatWarning()">এখনও রাগ আছি 😾</button>
             </div>
         </div>
     </div>
 
     <script>
+        // ব্যাকগ্রাউন্ডে নিজে নিজেই ফ্লোটিং লাভ হার্ট জেনারেট করার ফাংশন
+        function createHeart() {
+            const heartContainer = document.getElementById('heartContainer');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            
+            // রেন্ডম পজিশন ও সাইজ
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            
+            heartContainer.appendChild(heart);
+            
+            // অ্যানিমেশন শেষ হলে ডিলিট করে দেওয়া
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        setInterval(createHeart, 400);
+
         // পেজে ক্লিক করলেই ব্যাকগ্রাউন্ড মিউজিক প্লে করার হ্যান্ডলার
         window.addEventListener('click', () => {
             const music = document.getElementById('bgMusic');
@@ -219,16 +286,20 @@
             }
         }, { once: true });
 
-        // "No" বাটনটি মাউস বা আঙুল লাগলেই স্ক্রিনের অন্য জায়গায় পালিয়ে যাবে
+        // "No" বাটনটি মাউস বা আঙুল লাগলেই সুপার ফাস্ট এদিক-সেদিক পালিয়ে যাবে
         const noBtn = document.getElementById('noBtn');
 
         function moveButton() {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 100);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100);
+            const padding = 50;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            
+            const randomX = Math.max(padding, Math.random() * maxX);
+            const randomY = Math.max(padding, Math.random() * maxY);
             
             noBtn.style.position = 'fixed';
-            noBtn.style.left = `${Math.max(20, x)}px`;
-            noBtn.style.top = `${Math.max(20, y)}px`;
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
         }
 
         // মায়ার মাইরের হুমকি পপআপ
@@ -239,8 +310,8 @@
         // ক্ষমা করে দিলে যা হবে
         function acceptApology() {
             confetti({
-                particleCount: 150,
-                spread: 80,
+                particleCount: 200,
+                spread: 100,
                 origin: { y: 0.6 }
             });
 
