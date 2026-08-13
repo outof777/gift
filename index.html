@@ -1,324 +1,453 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Favorite Person ❤️</title>
-    <!-- কনফেটি লাইব্রেরি -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@300;400;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>For My Favorite Person ❤️</title>
 
-        body {
-            background-color: #050505;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            position: relative;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
 
-        /* সিনেমাটিক ডার্ক ওভারলে */
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
-            z-index: 1;
-        }
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-        /* ব্যাকগ্রাউন্ড ফ্লোটিং কিউট লাভ অ্যানিমেশন */
-        .floating-hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
+<style>
 
-        .heart {
-            position: absolute;
-            color: rgba(255, 71, 87, 0.6);
-            font-size: 20px;
-            animation: floatUp 6s linear infinite;
-            bottom: -20px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) scale(0.6) rotate(0deg);
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-105vh) scale(1.2) rotate(360deg);
-                opacity: 0;
-            }
-        }
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    position:relative;
 
-        .main-box {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 90%;
-            max-width: 600px;
-            padding: 20px;
-        }
+    background:
+    radial-gradient(circle at top,#ff758c33 0%,transparent 35%),
+    radial-gradient(circle at bottom,#ff7eb333 0%,transparent 35%),
+    linear-gradient(135deg,#050505,#111111,#050505);
 
-        /* ইমেজ ফ্রেম - ফিক্সড সাইজ এবং পারফেক্ট ফিট */
-        .image-frame {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            border: 4px solid #ff4757;
-            box-shadow: 0 0 35px rgba(255, 71, 87, 0.6);
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            animation: cinematicZoomIn 3s ease-out forwards;
-            animation-delay: 0.3s;
-            background-color: #1a1a1a;
-        }
+    color:white;
+}
 
-        .image-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            animation: slowKenBurns 10s infinite alternate;
-        }
+/* Floating Hearts */
 
-        /* টেক্সট কন্টেন্ট */
-        .text-content {
-            margin-top: 25px;
-            opacity: 0;
-            animation: fadeInText 2s ease-in forwards;
-            animation-delay: 2.8s;
-        }
+.hearts{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
 
-        h1 {
-            font-family: 'Sacramento', cursive;
-            font-size: 48px;
-            color: #ff4757;
-            margin-bottom: 8px;
-            text-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
-            animation: pulseGlow 2s infinite alternate;
-        }
+.heart{
+    position:absolute;
+    bottom:-50px;
+    animation:floatUp linear forwards;
+    opacity:0;
+}
 
-        @keyframes pulseGlow {
-            0% { text-shadow: 0 0 10px rgba(255, 71, 87, 0.5); }
-            100% { text-shadow: 0 0 25px rgba(255, 71, 87, 0.9); }
-        }
+@keyframes floatUp{
 
-        p {
-            font-size: 15px;
-            line-height: 1.7;
-            max-width: 500px;
-            margin: 0 auto 25px auto;
-            font-weight: 300;
-            color: #f1f1f1;
-        }
+    0%{
+        transform:translateY(0) scale(.5);
+        opacity:0;
+    }
 
-        /* বাটন গ্রুপ */
-        .btn-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            position: relative;
-            opacity: 0;
-            animation: fadeInText 1s ease-in forwards;
-            animation-delay: 4s;
-            width: 100%;
-            min-height: 60px;
-        }
+    20%{
+        opacity:1;
+    }
 
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
+    100%{
+        transform:translateY(-110vh) scale(1.5);
+        opacity:0;
+    }
+}
 
-        .btn-yes {
-            background: linear-gradient(45deg, #ff4757, #ff6b81);
-            color: white;
-            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
-            z-index: 10;
-        }
+/* Main Card */
 
-        .btn-yes:hover {
-            transform: translateY(-3px) scale(1.08);
-            box-shadow: 0 15px 30px rgba(255, 71, 87, 0.7);
-        }
+.card{
 
-        /* সুপার ফাস্ট পালানো বাটন (No Button) */
-        .btn-no {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            transition: top 0.1s ease, left 0.1s ease;
-            z-index: 100;
-        }
+    width:90%;
+    max-width:700px;
 
-        /* ====== এনিমেশন কী-ফ্রেম ====== */
-        @keyframes cinematicZoomIn {
-            0% {
-                transform: scale(0.1) rotate(-180deg);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1) rotate(0deg);
-                width: 240px;
-                height: 240px;
-                opacity: 1;
-                box-shadow: 0 0 50px rgba(255, 71, 87, 0.7);
-            }
-        }
+    padding:40px;
 
-        @keyframes slowKenBurns {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.12); }
-        }
+    border-radius:30px;
 
-        @keyframes fadeInText {
-            0% { opacity: 0; transform: translateY(15px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+    background:rgba(255,255,255,.08);
 
-        @media (max-width: 600px) {
-            @keyframes cinematicZoomIn {
-                100% { transform: scale(1); width: 190px; height: 190px; }
-            }
-            h1 { font-size: 38px; }
-            p { font-size: 13px; padding: 0 10px; }
-        }
-    </style>
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.5),
+    0 0 40px rgba(255,118,136,.2);
+
+    text-align:center;
+
+    position:relative;
+    z-index:10;
+
+    animation:fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Profile Image */
+
+.image-box{
+
+    width:250px;
+    height:250px;
+
+    margin:auto;
+
+    border-radius:50%;
+    overflow:hidden;
+
+    border:5px solid #ff758c;
+
+    box-shadow:
+    0 0 25px rgba(255,117,140,.6),
+    0 0 50px rgba(255,117,140,.3);
+
+    animation:pulse 2s infinite alternate;
+}
+
+.image-box img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+@keyframes pulse{
+
+    from{
+        box-shadow:
+        0 0 20px rgba(255,117,140,.5);
+    }
+
+    to{
+        box-shadow:
+        0 0 50px rgba(255,117,140,.9);
+    }
+}
+
+/* Text */
+
+h1{
+
+    margin-top:25px;
+
+    font-family:'Sacramento',cursive;
+
+    font-size:70px;
+
+    color:#ff8fa3;
+}
+
+.message{
+
+    margin-top:15px;
+
+    line-height:1.9;
+
+    color:#f5f5f5;
+
+    font-size:15px;
+
+    max-width:550px;
+
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* Buttons */
+
+.buttons{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+}
+
+.btn{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:14px 32px;
+
+    border-radius:999px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.3s ease;
+}
+
+.yes-btn{
+
+    background:linear-gradient(
+    45deg,
+    #ff4d6d,
+    #ff758f
+    );
+
+    color:white;
+
+    box-shadow:
+    0 10px 30px rgba(255,77,109,.4);
+}
+
+.yes-btn:hover{
+
+    transform:
+    translateY(-3px)
+    scale(1.05);
+}
+
+.no-btn{
+
+    background:rgba(255,255,255,.1);
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    backdrop-filter:blur(10px);
+}
+
+/* Success Box */
+
+.success{
+
+    display:none;
+
+    margin-top:25px;
+
+    animation:fadeIn .8s ease;
+}
+
+.success h2{
+
+    color:#ff9eb2;
+
+    margin-bottom:10px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .card{
+        padding:25px;
+    }
+
+    .image-box{
+
+        width:190px;
+        height:190px;
+    }
+
+    h1{
+        font-size:50px;
+    }
+
+    .message{
+        font-size:14px;
+    }
+}
+
+</style>
 </head>
+
 <body>
-    
-    <div class="overlay"></div>
 
-    <!-- ব্যাকগ্রাউন্ডে কিউট ফ্লোটিং লাভ অ্যানিমেশন কন্টেইনার -->
-    <div class="floating-hearts" id="heartContainer"></div>
+<div class="hearts" id="hearts"></div>
 
-    <!-- ব্যাকগ্রাউন্ডে মিষ্টি রোমান্টিক মিউজিক টোন (ফ্রি রিলায়েবল সিডিএন সোর্স) -->
-    <audio id="bgMusic" loop>
-        <source src="https://actions.google.com/sounds/v1/ambiences/romantic_lofi.ogg" type="audio/ogg">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=romantic-cute-love-111082.mp3" type="audio/mpeg">
-    </audio>
+<div class="card">
 
-    <div class="main-box">
-        <!-- ইমেজ ফ্রেম (ORB ব্লকিং এড়াতে সঠিক হ্যান্ডলিং) -->
-        <div class="image-frame">
-            <img src="https://raw.githubusercontent.com/nahid-mahmud555/nahid-mahmud555/main/ChatGPT%20Image%20Aug%2013%2C%202026%2C%2010_46_43%20PM.png" alt="Special Person" crossorigin="anonymous" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=500&auto=format&fit=crop'">
-        </div>
+    <div class="image-box">
 
-        <!-- সুদৃশ্য কথা ও আকুতি -->
-        <div class="text-content">
-            <h1>I am really sorry!</h1>
-            <p>জানি আমার ওপর অনেক অভিমান করে আছো, রাগ করে কথা কম বলছ... বিশ্বাস করো, তোমার এই সুন্দর মুখটাতে একটু কান্নার বা রাগের ছায়া দেখলে আমার নিজের ভেতরটা কেমন যেন ভেঙে যায়। দুনিয়ার সব সুখ একপাশে আর তোমার এই মিষ্টি হাসিটা একপাশে! প্লিজ সব রাগ পানি করে ফেলো না সোনা?</p>
-            
-            <!-- বাটন সেকশন -->
-            <div class="btn-group" id="btnContainer">
-                <button class="btn btn-yes" onclick="acceptApology()">মাফ করে দিলাম ❤️</button>
-                <button class="btn btn-no" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()" onclick="threatWarning()">এখনও রাগ আছি 😾</button>
-            </div>
-        </div>
+        <img
+        src="https://raw.githubusercontent.com/outof777/gift/main/ChatGPT%20Image%20Aug%2013%2C%202026%2C%2010_46_43%20PM.png"
+        alt="Special Person"
+        onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1000'">
+
     </div>
 
-    <script>
-        // ব্যাকগ্রাউন্ডে নিজে নিজেই ফ্লোটিং লাভ হার্ট জেনারেট করার ফাংশন
-        function createHeart() {
-            const heartContainer = document.getElementById('heartContainer');
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            
-            // রেন্ডম পজিশন ও সাইজ
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
-            
-            heartContainer.appendChild(heart);
-            
-            // অ্যানিমেশন শেষ হলে ডিলিট করে দেওয়া
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
+    <h1>I'm Sorry ❤️</h1>
+
+    <p class="message">
+
+        জানি আমার উপর অনেক রাগ করে আছো...
+        কিন্তু বিশ্বাস করো, তোমার হাসিটাই আমার পৃথিবীর
+        সবচেয়ে সুন্দর জিনিস। 🥺❤️
+
+        <br><br>
+
+        তোমার মুখে একটু অভিমান দেখলেও আমার মনটা
+        খারাপ হয়ে যায়। তাই আজ সব রাগ, অভিমান
+        আর কষ্ট ভুলে গিয়ে আবার আগের মতো
+        একটা সুন্দর হাসি দাও না?
+
+        ✨❤️
+
+    </p>
+
+    <div class="buttons" id="buttonBox">
+
+        <button
+        class="btn yes-btn"
+        onclick="forgiveMe()">
+
+            মাফ করে দিলাম ❤️
+
+        </button>
+
+        <button
+        class="btn no-btn"
+        id="noBtn"
+        onmouseover="moveButton()"
+        ontouchstart="moveButton()">
+
+            এখনও রাগ আছি 😾
+
+        </button>
+
+    </div>
+
+    <div class="success" id="successBox">
+
+        <h2>Yayyy! 🥰❤️</h2>
+
+        <p>
+
+            আমি জানতাম তুমি বেশিক্ষণ রাগ করে
+            থাকতে পারবে না। ❤️
+
+            <br><br>
+
+            Promise...
+            তোমার হাসিটা সবসময়
+            আগলে রাখার চেষ্টা করবো। ✨
+
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+/* Floating Hearts */
+
+const heartsContainer =
+document.getElementById("hearts");
+
+function createHeart(){
+
+    const heart =
+    document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML = "❤️";
+
+    heart.style.left =
+    Math.random()*100 + "vw";
+
+    heart.style.fontSize =
+    (15 + Math.random()*25) + "px";
+
+    heart.style.animationDuration =
+    (4 + Math.random()*4) + "s";
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },8000);
+}
+
+setInterval(createHeart,300);
+
+/* Run Away Button */
+
+const noBtn =
+document.getElementById("noBtn");
+
+function moveButton(){
+
+    const x =
+    Math.random() *
+    (window.innerWidth -
+    noBtn.offsetWidth - 50);
+
+    const y =
+    Math.random() *
+    (window.innerHeight -
+    noBtn.offsetHeight - 50);
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+/* Forgive Function */
+
+function forgiveMe(){
+
+    confetti({
+
+        particleCount:250,
+        spread:120,
+        startVelocity:40,
+
+        origin:{
+            y:0.6
         }
-        setInterval(createHeart, 400);
 
-        // পেজে ক্লিক করলেই ব্যাকগ্রাউন্ড মিউজিক প্লে করার হ্যান্ডলার
-        window.addEventListener('click', () => {
-            const music = document.getElementById('bgMusic');
-            if (music.paused) {
-                music.play().catch(e => console.log("Audio play blocked"));
-            }
-        }, { once: true });
+    });
 
-        // "No" বাটনটি মাউস বা আঙুল লাগলেই সুপার ফাস্ট এদিক-সেদিক পালিয়ে যাবে
-        const noBtn = document.getElementById('noBtn');
+    document.getElementById(
+    "buttonBox"
+    ).style.display="none";
 
-        function moveButton() {
-            const padding = 50;
-            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-            
-            const randomX = Math.max(padding, Math.random() * maxX);
-            const randomY = Math.max(padding, Math.random() * maxY);
-            
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = `${randomX}px`;
-            noBtn.style.top = `${randomY}px`;
-        }
+    document.getElementById(
+    "successBox"
+    ).style.display="block";
+}
 
-        // মায়ার মাইরের হুমকি পপআপ
-        function threatWarning() {
-            alert("খবরদার! 😾 রাগ করা এক্কেবারে নিষেধ! বেশি বাড়াবাড়ি করলে কিন্তু সোজা মায়ার মাইর দিয়ে একদম ভূত নামিয়ে দেব! তাড়াতাড়ি 'মাফ করে দিলাম' বাটনটায় ক্লিক করো! 😉");
-        }
+</script>
 
-        // ক্ষমা করে দিলে যা হবে
-        function acceptApology() {
-            confetti({
-                particleCount: 200,
-                spread: 100,
-                origin: { y: 0.6 }
-            });
-
-            document.querySelector('.text-content h1').innerText = "Yay! Thank You! 🥰";
-            document.querySelector('.text-content p').innerText = "আমি জানতাম তুমি আমার ওপর বেশিক্ষণ রাগ করে থাকতে পারবে না! Promise আর কখনো তোমাকে কষ্ট দেব না। You are my whole world! ✨❤️";
-            document.getElementById('btnContainer').style.display = 'none';
-        }
-    </script>
 </body>
 </html>
